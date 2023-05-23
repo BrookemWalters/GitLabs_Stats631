@@ -1,0 +1,66 @@
+---
+title: "Fitting an SLR Model"
+author: "Brooke Walters"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+```
+
+
+Load the data
+```{r}
+colnames(Walkable_2021)
+```
+```{r}
+# AutoOwn0 = y
+
+
+```
+
+```{r}
+walkit <-  Walkable_2021 %>% 
+  filter(CSA_Name == 'Grand Rapids-Kentwood-Muskegon')
+  select(AutoOwn0,NatWalkInd, TotPop, CSA_Name, Workers)
+
+head(walkit)
+```
+
+```{r}
+# make some plots
+ggplot(walkit, aes(x = NatWalkInd, y = TotPop))+
+geom_point()
+
+```
+```{r}
+# make a histogram
+ggplot(walkit, aes(x=NatWalkInd)) +
+    geom_histogram(binwidth=.5, colour="white") +
+    geom_vline(aes(xintercept=mean(NatWalkInd, na.rm=T)),   
+               color="#B41876", linetype="dashed", size=1)
+
+```
+
+```{r}
+#for the console
+statsr::plot_ss(x = TotPop, y = NatWalkInd, data = walkit)
+```
+
+```{r}
+# Created a parsnip specification for a linear model
+
+lm_spec <- linear_reg() %>%
+  set_mode("regression") %>%
+  set_engine("lm")
+
+# Fit our specification to our data
+
+slr_mod <- lm_spec %>% 
+fit(y_variable ~ x_variable, data = data_name)
+
+# View our model output
+tidy(slr_mod)
+```
+
