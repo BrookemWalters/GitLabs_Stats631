@@ -1,0 +1,30 @@
+---
+title: "Brooke"
+author: "Brooke Walters"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+**Here is my markdown document.**
+
+![data mining](https://i.redd.it/1v362bikd2r51.jpg)
+
+I selected this image because data privacy is an on going topic.
+
+## Portfolios I enjoyed:
+
+[Will Chase's portfolio](https://www.williamrchase.com/) was my favorite due to the:
+
+-   creative fonts
+
+-   impactful use of animations
+
+-   clean layout
+
+-   bursts of colors
+
+-   minimalist presentation of the graphics
