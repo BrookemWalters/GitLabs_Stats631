@@ -2,7 +2,9 @@
 title: "Fitting an SLR Model"
 author: "Brooke Walters"
 date: "`r Sys.Date()`"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r}
@@ -12,18 +14,22 @@ library(tidyverse)
 
 Load the data
 ```{r}
-colnames(Walkable_2021)
-```
-```{r}
-# AutoOwn0 = y
-
-
+# "https://edg.epa.gov/EPADataCommons/public/OA/EPA_SmartLocationDatabase_V3_Jan_2021_Final.csv" # too big for git
+walkable <- read.csv("~/gvsu/summer 23/stat 631/data(too big for git)/walkable_2021.csv")
 ```
 
+
+Explore the data
 ```{r}
-walkit <-  Walkable_2021 %>% 
-  filter(CSA_Name == 'Grand Rapids-Kentwood-Muskegon')
-  select(AutoOwn0,NatWalkInd, TotPop, CSA_Name, Workers)
+colnames(walkable)
+```
+
+
+
+```{r}
+walkit <- walkable %>%
+  filter( CSA_Name == 'Grand Rapids-Kentwood-Muskegon, MI') %>% 
+  select(NatWalkInd, TotPop, CSA_Name, Workers, Ac_Land)
 
 head(walkit)
 ```
@@ -48,8 +54,16 @@ ggplot(walkit, aes(x=NatWalkInd)) +
 statsr::plot_ss(x = TotPop, y = NatWalkInd, data = walkit)
 ```
 
+
+```{r}
+library(tidymodels)
+```
+
+
 ```{r}
 # Created a parsnip specification for a linear model
+
+# , "parsnip" refers to a package that provides a consistent interface for working with various modeling engines in R, such as glm, random forests, support vector machines, etc. It allows you to specify and fit models using a unified syntax, regardless of the underlying modeling engine.
 
 lm_spec <- linear_reg() %>%
   set_mode("regression") %>%
@@ -57,8 +71,8 @@ lm_spec <- linear_reg() %>%
 
 # Fit our specification to our data
 
-slr_mod <- lm_spec %>% 
-fit(y_variable ~ x_variable, data = data_name)
+slr_mod <- fit(lm_spec, formula = TotPop ~ NatWalkInd, data = walkit)
+
 
 # View our model output
 tidy(slr_mod)
