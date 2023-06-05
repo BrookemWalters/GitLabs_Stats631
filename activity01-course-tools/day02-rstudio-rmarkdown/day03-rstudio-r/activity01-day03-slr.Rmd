@@ -137,6 +137,9 @@ hfi_2016 <-  data %>%
 hfi_2016
 ```
 
+
+
+
 ### 1. Identify our research question(s)
 
 The research question is often defined by you (or your company, boss, etc.).
@@ -144,6 +147,12 @@ Today's research question/goal is to predict a country's personal freedom score 
 
 For this activity we want to explore the relationship between the personal freedom score, `pf_score`, and the political pressures and controls on media content index,`pf_expression_control`.
 Specifically, we are going to use the political pressures and controls on media content index to predict a country's personal freedom score in 2016.
+
+Questions:
+ - which countries are the most violent and safe?
+ - have trends gotten better or worse since 2004?
+ - which countries have similar factors and outcomes?
+ 
 
 ### 2. Explore the variables of interest
 
