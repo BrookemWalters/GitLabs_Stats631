@@ -32,6 +32,26 @@ char_vect
 
 ```
 
+
+```{r}
+# how many letters occur after D?
+abcd_vect  <- LETTERS[1:4]
+
+# iterate and count
+for (i in char_vect) {
+  if (i %in% abcd_vect) {
+    (next)
+  } else {
+    x <- x+1
+  }
+}
+   
+print(x)    
+    
+
+
+```
+
 In the code chunk named "simple-calculations", add the R code that does the following:
 
 1.  Adds the values 2 and 5.

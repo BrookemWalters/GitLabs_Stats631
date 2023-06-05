@@ -36,7 +36,7 @@ head(walkit)
 
 ```{r}
 # make some plots
-ggplot(walkit, aes(x = NatWalkInd, y = TotPop))+
+ggplot(walkit_train, aes(x = NatWalkInd, y = TotPop))+
 geom_point()
 
 ```
@@ -71,10 +71,21 @@ lm_spec <- linear_reg() %>%
 
 # Fit our specification to our data
 
-slr_mod <- fit(lm_spec, formula = TotPop ~ NatWalkInd, data = walkit)
+slr_mod <- fit(lm_spec, formula = TotPop ~ NatWalkInd, data = walkit_train)
 
 
 # View our model output
 tidy(slr_mod)
+```
+
+
+
+```{r}
+slr_aug <- augment(slr_mod, new_data = walkit_train)
+slr_aug
+```
+
+```{r}
+predict(slr_mod, new_data = walkit_test)
 ```
 

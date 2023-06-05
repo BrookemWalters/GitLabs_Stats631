@@ -43,6 +43,24 @@ char_vect
 
     ##  [1] "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P" "Q"
 
+``` r
+# how many letters occur after D?
+abcd_vect  <- LETTERS[1:4]
+
+# iterate and count
+for (i in char_vect) {
+  if (i %in% abcd_vect) {
+    (next)
+  } else {
+    x <- x+1
+  }
+}
+   
+print(x)    
+```
+
+    ## [1] 20
+
 In the code chunk named “simple-calculations”, add the R code that does
 the following:
 
@@ -115,11 +133,7 @@ text](https://emilhvitfeldt.github.io/ISLR-tidymodels-labs/index.html).
   library(tidyverse)
   ```
 
-      ## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
-      ## ✔ ggplot2 3.4.2     ✔ purrr   1.0.1
-      ## ✔ tibble  3.2.1     ✔ dplyr   1.1.2
-      ## ✔ tidyr   1.3.0     ✔ stringr 1.5.0
-      ## ✔ readr   2.1.3     ✔ forcats 0.5.2
+      ## Warning: package 'tidyverse' was built under R version 4.2.3
 
       ## Warning: package 'ggplot2' was built under R version 4.2.3
 
@@ -127,13 +141,26 @@ text](https://emilhvitfeldt.github.io/ISLR-tidymodels-labs/index.html).
 
       ## Warning: package 'tidyr' was built under R version 4.2.3
 
+      ## Warning: package 'readr' was built under R version 4.2.3
+
       ## Warning: package 'dplyr' was built under R version 4.2.3
 
       ## Warning: package 'stringr' was built under R version 4.2.3
 
+      ## Warning: package 'forcats' was built under R version 4.2.3
+
+      ## Warning: package 'lubridate' was built under R version 4.2.3
+
+      ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+      ## ✔ dplyr     1.1.2     ✔ readr     2.1.4
+      ## ✔ forcats   1.0.0     ✔ stringr   1.5.0
+      ## ✔ ggplot2   3.4.2     ✔ tibble    3.2.1
+      ## ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+      ## ✔ purrr     1.0.1     
       ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
       ## ✖ dplyr::filter() masks stats::filter()
       ## ✖ dplyr::lag()    masks stats::lag()
+      ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 
   ``` r
   library(tidymodels)

@@ -1,0 +1,131 @@
+---
+title: "Fitting an SLR Model"
+author: "Brooke Walters"
+date: "`r Sys.Date()`"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r}
+library(tidyverse)
+```
+
+
+Load the data
+```{r}
+# "https://edg.epa.gov/EPADataCommons/public/OA/EPA_SmartLocationDatabase_V3_Jan_2021_Final.csv" # too big for git
+walkable <- read.csv("~/gvsu/summer 23/stat 631/data(too big for git)/walkable_2021.csv")
+```
+
+
+Explore the data
+```{r}
+colnames(walkable)
+```
+
+
+
+```{r}
+walkit <- walkable %>%
+  filter( CSA_Name == 'Grand Rapids-Kentwood-Muskegon, MI') %>% 
+  select(NatWalkInd, TotPop, CSA_Name, Workers, Ac_Land)
+
+head(walkit_train)
+```
+
+```{r}
+# make some plots
+ggplot(walkit_train, aes(x = NatWalkInd, y = TotPop))+
+geom_point()
+
+```
+```{r}
+# make a histogram
+ggplot(walkit, aes(x=NatWalkInd)) +
+    geom_histogram(binwidth=.5, colour="white") +
+    geom_vline(aes(xintercept=mean(NatWalkInd, na.rm=T)),   
+               color="#B41876", linetype="dashed", size=1)
+
+```
+
+
+
+```{r}
+#for the console
+statsr::plot_ss(x = TotPop, y = NatWalkInd, data = walkit)
+```
+
+
+```{r}
+library(tidymodels)
+```
+
+
+```{r}
+# Created a parsnip specification for a linear model
+
+# , "parsnip" refers to a package that provides a consistent interface for working with various modeling engines in R, such as glm, random forests, support vector machines, etc. It allows you to specify and fit models using a unified syntax, regardless of the underlying modeling engine.
+
+lm_spec <- linear_reg() %>%
+  set_mode("regression") %>%
+  set_engine("lm")
+
+# Fit our specification to our data
+
+slr_mod <- fit(lm_spec, formula = TotPop ~ NatWalkInd, data = walkit_train)
+
+
+# View our model output
+tidy(slr_mod)
+```
+
+
+train and split the data
+```{r}
+# set seed before random split
+set.seed(2020)
+# put 80% of the data into the training set
+walkit_split <- initial_split(walkit, prop = 0.80)
+
+# assign the two splits to data frames - with descriptive names
+walkit_train <- training(walkit_split)
+walkit_test <- testing(walkit_split)
+
+# splits
+walkit_train
+
+```
+
+
+```{r}
+# Created a parsnip specification for a linear model
+
+# , "parsnip" refers to a package that provides a consistent interface for working with various modeling engines in R, such as glm, random forests, support vector machines, etc. It allows you to specify and fit models using a unified syntax, regardless of the underlying modeling engine.
+
+lm_spec <- linear_reg() %>%
+  set_mode("regression") %>%
+  set_engine("lm")
+
+# Fit our specification to our data
+
+slr_mod <- fit(lm_spec, formula = TotPop ~ NatWalkInd, data = walkit_train)
+
+
+# View our model output
+tidy(slr_mod)
+```
+
+
+
+```{r}
+slr_aug <- augment(slr_mod, new_data = walkit_train)
+slr_aug
+```
+
+```{r}
+x <- predict(slr_mod, new_data = walkit_test)
+```
+
+
+
