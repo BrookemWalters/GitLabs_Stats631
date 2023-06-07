@@ -1,0 +1,8 @@
+---
+title: "3.2 Simple linear regression"
+author: "Brooke"
+format: pdf
+editor: visual
+---
+
+## 
